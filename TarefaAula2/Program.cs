@@ -1,5 +1,8 @@
 ﻿
-List<Cadastro> usuarios = new List<Cadastro>();
+using System.Collections;
+using System.Linq;
+
+ArrayList usuarios = new();
 Cadastro.Usuarios = usuarios;
 
 Cadastro.CadastrarUsuario();
@@ -28,7 +31,7 @@ class Cadastro
     public string Login { get; set; }
     public string Senha { get; set; }
 
-    public static List<Cadastro> Usuarios;
+    public static ArrayList Usuarios;
 
     public Cadastro(string login, string senha)
     {
@@ -65,7 +68,7 @@ class Cadastro
         Console.WriteLine("Insira o login");
         string login = Console.ReadLine();
 
-        var usuario = Usuarios.FirstOrDefault(x => x.Login == login);
+        var usuario = Usuarios.ToArray().FirstOrDefault(x => ((Cadastro)x).Login == login);
 
         if (usuario == null)
         {
@@ -80,7 +83,7 @@ class Cadastro
         {
             Console.WriteLine("Insira a senha");
             senha = Console.ReadLine();
-            if(usuario.Senha == senha)
+            if(((Cadastro)usuario).Senha == senha)
             {
                 Console.WriteLine("Usuário logado");
                 return;
